@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Example</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Lista de Usuarios</h1>
+  <table id="tablausuarios" border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+      </tr>
+    </thead>
+    <tbody>
+     
+    </tbody>
+  </table>
+
+  <script>
+    // Conectar a la API y obtener los datos de usuarios
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(data => {
+        const Tabla = document.querySelector('#tablausuarios tbody');
+
+        // Recorrer los datos y agregarlos a la tabla
+        data.forEach(user => {
+          const row = document.createElement('tr');
+
+          // Crear y agregar las celdas
+          row.innerHTML = `
+            <td>${user.id}</td>
+            <td>${user.name}</td>
+            <td>${user.email}</td>
+            <td>${user.phone}</td>
+          `;
+          
+          // Añadir la fila a la tabla
+          Tabla.appendChild(row);
+        });
+      })
+      .catch(error => console.error('Error:', error));
+  </script>
+</body>
+</html>
